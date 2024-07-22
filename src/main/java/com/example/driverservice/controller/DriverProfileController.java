@@ -1,5 +1,6 @@
 package com.example.driverservice.controller;
 
+import com.example.driverservice.dto.AuthenticationResponse;
 import com.example.driverservice.dto.DriverDto;
 import com.example.driverservice.service.DriverService;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +14,9 @@ public class DriverProfileController {
     private final DriverService driverService;
 
     @PostMapping("/drivers/register")
-    public ResponseEntity<DriverDto> registerDriver(@RequestBody DriverDto dto){
-        DriverDto driverDto = driverService.registerDriver(dto);
-        return ResponseEntity.ok(driverDto);
+    public ResponseEntity<AuthenticationResponse> registerDriver(@RequestBody DriverDto dto){
+        AuthenticationResponse authenticationResponse = driverService.registerDriver(dto);
+        return ResponseEntity.ok(authenticationResponse);
     }
 
 

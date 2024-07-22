@@ -1,9 +1,10 @@
 package com.example.driverservice.service;
 
+import com.example.driverservice.dto.AuthenticationResponse;
 import com.example.driverservice.dto.DriverDto;
 
 public interface DriverService {
 
-    DriverDto registerDriver(DriverDto dto);
+    AuthenticationResponse registerDriver(DriverDto dto);
 }
 
