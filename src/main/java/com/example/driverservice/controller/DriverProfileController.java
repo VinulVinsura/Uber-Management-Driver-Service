@@ -2,6 +2,7 @@ package com.example.driverservice.controller;
 
 import com.example.driverservice.dto.AuthenticationResponse;
 import com.example.driverservice.dto.DriverDto;
+import com.example.driverservice.dto.LoginDetailsDto;
 import com.example.driverservice.service.DriverService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,16 @@ public class DriverProfileController {
     private final DriverService driverService;
 
     @PostMapping("/drivers/register")
+
     public ResponseEntity<AuthenticationResponse> registerDriver(@RequestBody DriverDto dto){
         AuthenticationResponse authenticationResponse = driverService.registerDriver(dto);
         return ResponseEntity.ok(authenticationResponse);
+    }
+
+    @PostMapping("/drivers/login")
+    public ResponseEntity<AuthenticationResponse> loginDriver(@RequestBody LoginDetailsDto loginDetailsDto){
+        AuthenticationResponse response = driverService.loginDriver(loginDetailsDto);
+        return ResponseEntity.ok(response);
     }
 
 

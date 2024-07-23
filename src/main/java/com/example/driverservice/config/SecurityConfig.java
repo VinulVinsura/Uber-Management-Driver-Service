@@ -28,7 +28,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer ::disable)
                 .authorizeHttpRequests(
-                        req->req.requestMatchers("/login/**","/drivers/register/**")
+                        req->req.requestMatchers("/drivers/login/**","/drivers/register/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
