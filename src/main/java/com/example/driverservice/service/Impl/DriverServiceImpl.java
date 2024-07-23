@@ -52,4 +52,10 @@ public class DriverServiceImpl implements DriverService {
 
         return new AuthenticationResponse(toke);
     }
+
+    @Override
+    public DriverDto getDriverDetails(Integer driverId) {
+       return modelMapper.map(driverRepo.findById(driverId), DriverDto.class);
+
+    }
 }

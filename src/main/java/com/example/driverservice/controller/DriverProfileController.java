@@ -27,6 +27,15 @@ public class DriverProfileController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/drivers/profile/{driverId}")
+    public ResponseEntity<DriverDto> getUserDetails(@PathVariable Integer driverId){
+        DriverDto driverDto = driverService.getDriverDetails(driverId);
+        if (driverDto==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(driverDto);
+    }
+
 
 
 }

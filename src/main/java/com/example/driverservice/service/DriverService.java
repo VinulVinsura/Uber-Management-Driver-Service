@@ -8,5 +8,6 @@ public interface DriverService {
 
     AuthenticationResponse registerDriver(DriverDto dto);
     AuthenticationResponse loginDriver(LoginDetailsDto loginDetailsDto);
+    DriverDto getDriverDetails(Integer driverId);
 }
 
