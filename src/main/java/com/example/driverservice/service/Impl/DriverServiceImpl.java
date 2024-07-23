@@ -3,16 +3,20 @@ package com.example.driverservice.service.Impl;
 import com.example.driverservice.dto.AuthenticationResponse;
 import com.example.driverservice.dto.DriverDto;
 import com.example.driverservice.dto.LoginDetailsDto;
+import com.example.driverservice.dto.SupportTicket;
 import com.example.driverservice.entity.Driver;
 import com.example.driverservice.repository.DriverRepo;
 import com.example.driverservice.service.DriverService;
 import com.example.driverservice.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -24,6 +28,7 @@ public class DriverServiceImpl implements DriverService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final RestTemplate restTemplate;
     @Override
     public AuthenticationResponse registerDriver(DriverDto dto) {
         Driver driver=new Driver();
@@ -57,5 +62,14 @@ public class DriverServiceImpl implements DriverService {
     public DriverDto getDriverDetails(Integer driverId) {
        return modelMapper.map(driverRepo.findById(driverId), DriverDto.class);
 
+    }
+
+    @Override
+    public SupportTicket addSupportTicket(SupportTicket supportTicket) {
+        String url="http://localhost:9001/post/support-ticket";
+        HttpEntity<SupportTicket> httpEntity =new HttpEntity<>(supportTicket);
+        ResponseEntity<SupportTicket> response = restTemplate.postForEntity(url, httpEntity, SupportTicket.class);
+
+        return response.getBody();
     }
 }
