@@ -15,5 +15,7 @@ public interface DriverService {
     SupportTicket addSupportTicket(SupportTicket supportTicket);
 
     List<SupportTicket> getAllSupportTicket(String  userId);
+
+    SupportTicket getSupportTicketByTicketId(String userId, Integer ticketId);
 }
 

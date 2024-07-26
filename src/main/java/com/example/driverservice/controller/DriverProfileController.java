@@ -7,6 +7,7 @@ import com.example.driverservice.dto.SupportTicket;
 import com.example.driverservice.service.DriverService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -60,6 +61,19 @@ public class DriverProfileController {
         }catch (HttpClientErrorException ex){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/drivers/support/ticket/{userId}/{ticketId}")
+    public ResponseEntity<SupportTicket> getSupportTicketByTicketId(@PathVariable String userId,
+                                                                    @PathVariable Integer ticketId){
+
+        try {
+            SupportTicket supportTicket = driverService.getSupportTicketByTicketId(userId, ticketId);
+            return ResponseEntity.ok(supportTicket);
+        }catch (HttpClientErrorException ex){
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 

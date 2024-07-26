@@ -81,4 +81,12 @@ public class DriverServiceImpl implements DriverService {
         ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
         return response.getBody();
     }
+
+    @Override
+    public SupportTicket getSupportTicketByTicketId(String userId, Integer ticketId) {
+
+        String url="http://localhost:9001/get-support-ticket/"+userId+"/"+ticketId+"/Driver";
+        ResponseEntity<SupportTicket> response = restTemplate.getForEntity(url, SupportTicket.class);
+        return response.getBody();
+    }
 }
