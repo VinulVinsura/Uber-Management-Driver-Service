@@ -21,6 +21,7 @@ public class DriverProfileController {
 
 
     @PostMapping("/drivers/register")
+
     //  Register a new driver.
     public ResponseEntity<AuthenticationResponse> registerDriver(@RequestBody DriverDto dto){
         AuthenticationResponse authenticationResponse = driverService.registerDriver(dto);
