@@ -8,6 +8,9 @@ import com.example.driverservice.service.DriverService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -47,6 +50,19 @@ public class DriverProfileController {
         return ResponseEntity.ok(ticket);
 
     }
+
+    @GetMapping("/drivers/support/ticket/{userId}")
+
+    public ResponseEntity<List<SupportTicket>> getAllSupportTicket(@PathVariable String userId){
+        try {
+            List<SupportTicket> supportTicketList = driverService.getAllSupportTicket(userId);
+            return ResponseEntity.ok(supportTicketList);
+        }catch (HttpClientErrorException ex){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 
 

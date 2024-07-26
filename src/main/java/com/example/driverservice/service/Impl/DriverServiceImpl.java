@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -70,6 +71,14 @@ public class DriverServiceImpl implements DriverService {
         HttpEntity<SupportTicket> httpEntity =new HttpEntity<>(supportTicket);
         ResponseEntity<SupportTicket> response = restTemplate.postForEntity(url, httpEntity, SupportTicket.class);
 
+        return response.getBody();
+    }
+
+    @Override
+    public List getAllSupportTicket(String userId) {
+
+        String url="http://localhost:9001/getAll-support-ticket/"+userId+"/Driver";
+        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
         return response.getBody();
     }
 }
